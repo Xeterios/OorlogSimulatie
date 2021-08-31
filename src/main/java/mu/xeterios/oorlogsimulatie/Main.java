@@ -20,7 +20,7 @@ public final class Main extends JavaPlugin {
     public ArrayList<Map> maps;
 
     public File customConfigFile;
-    private FileConfiguration customConfig;
+    public FileConfiguration customConfig;
 
     @Override
     public void onEnable() {
@@ -37,12 +37,8 @@ public final class Main extends JavaPlugin {
     public void onDisable() {
         // Plugin shutdown logic
         this.game.Stop();
+        config.SaveConfig();
         config.ReloadConfig();
-        try {
-            customConfig.save(customConfigFile);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 
     public FileConfiguration getCustomConfig() {

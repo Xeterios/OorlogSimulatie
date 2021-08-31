@@ -22,7 +22,6 @@ public class Setspawn implements ICmd {
     public void Execute(CommandSender sender, String label, Main main, Config config) {
         if (sender instanceof Player){
             if (args.length > 1){
-                boolean check = false;
                 Map toSetSpawnFor = null;
                 for (Map map: main.maps){
                     if (Objects.equals(map.getMapName(), args[1])){
@@ -34,11 +33,13 @@ public class Setspawn implements ICmd {
                         switch (args[2]){
                             case "attackers":
                                 toSetSpawnFor.setSpawnAttackers(((Player)sender).getLocation());
-                                sender.sendMessage(config.getPluginPrefix() + "Spawn gezet voor attackers: " + ((Player)sender).getLocation().toBlockLocation());
+                                sender.sendMessage(config.getPluginPrefix() + "Spawn gezet voor attackers: " + ((Player)sender).getLocation().getBlockX() + " " + ((Player)sender).getLocation().getBlockY() + " " + ((Player)sender).getLocation().getBlockZ() + ".");
+                                config.SaveConfig();
                                 break;
                             case "defenders":
                                 toSetSpawnFor.setSpawnDefenders(((Player)sender).getLocation());
-                                sender.sendMessage(config.getPluginPrefix() + "Spawn gezet voor defenders: " + ((Player)sender).getLocation().toBlockLocation());
+                                sender.sendMessage(config.getPluginPrefix() + "Spawn gezet voor defenders: " + ((Player)sender).getLocation().getBlockX() + " " + ((Player)sender).getLocation().getBlockY() + " " + ((Player)sender).getLocation().getBlockZ() + ".");
+                                config.SaveConfig();
                                 break;
                             default:
                                 sender.sendMessage(config.getPluginPrefix() + ChatColor.RED + "Attackers of defenders?");

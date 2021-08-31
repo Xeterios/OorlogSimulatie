@@ -1,9 +1,6 @@
 package mu.xeterios.oorlogsimulatie.commands;
 
-import mu.xeterios.oorlogsimulatie.commands.command.Create;
-import mu.xeterios.oorlogsimulatie.commands.command.Forcestart;
-import mu.xeterios.oorlogsimulatie.commands.command.Forcestop;
-import mu.xeterios.oorlogsimulatie.commands.command.Setspawn;
+import mu.xeterios.oorlogsimulatie.commands.command.*;
 
 public class CommandFactory {
 
@@ -17,6 +14,8 @@ public class CommandFactory {
                 return new Forcestop(args);
             case "setspawn":
                 return new Setspawn(args);
+            case "maps":
+                return new Maps();
             default:
                 return null;
         }

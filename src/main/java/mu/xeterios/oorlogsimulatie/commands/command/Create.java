@@ -51,15 +51,10 @@ public class Create implements ICmd {
                 }
             }
             if (allowed){
-                main.getCustomConfig().set("maps." + args[2] + ".region", region.getId());
-                main.getCustomConfig().set("maps." + args[2] + ".spawn.attackers", "not-set");
-                main.getCustomConfig().set("maps." + args[2] + ".spawn.defenders", "not-set");
                 Map map = new Map(args[2], region);
                 main.maps.add(map);
                 sender.sendMessage(config.getPluginPrefix() + "New map created: " + map);
-                try {
-                    main.getCustomConfig().save(main.customConfigFile);
-                } catch (IOException ignored) { }
+                config.SaveConfig();
             } else {
                 sender.sendMessage(config.getPluginPrefix() + ChatColor.RED + "Deze region is al gebonden aan een map.");
             }
