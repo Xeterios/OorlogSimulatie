@@ -1,0 +1,12 @@
+name: OorlogSimulatie
+version: '${project.version}'
+main: mu.xeterios.oorlogsimulatie.Main
+api-version: 1.16
+authors: [ Xeterios ]
+description: The game of murder mystery
+depend: [WorldGuard]
+commands:
+  oorlogsimulatie:
+    description: Control de oorlogsimulatie plugin
+    usage: /<command>
+    aliases: [os]
