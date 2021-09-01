@@ -10,6 +10,7 @@ import mu.xeterios.oorlogsimulatie.commands.CommandFactory;
 import mu.xeterios.oorlogsimulatie.commands.PermissionType;
 import mu.xeterios.oorlogsimulatie.commands.command.Default;
 import mu.xeterios.oorlogsimulatie.config.Config;
+import mu.xeterios.oorlogsimulatie.map.Map;
 import org.bukkit.ChatColor;
 import org.bukkit.World;
 import org.bukkit.command.Command;
@@ -92,13 +93,18 @@ public class CommandHandler implements CommandExecutor, TabCompleter {
             }
             if (args.length == 2){
                 // Possibly implement
-                if (args[0].equals("create") || args[0].equals("setspawn")){
+                if (args[0].equals("create")){
                     RegionContainer container = WorldGuard.getInstance().getPlatform().getRegionContainer();
                     World world = ((org.bukkit.entity.Player)sender).getWorld();
                     RegionManager man = container.get(BukkitAdapter.adapt(world));
                     assert man != null;
                     Set<String> keys = man.getRegions().keySet();
                     toReturn.addAll(keys);
+                }
+                if (args[0].equals("setspawn")){
+                    for(Map map : config.main.maps){
+                        toReturn.add(map.getMapName());
+                    }
                 }
             }
             if (args.length == 3){

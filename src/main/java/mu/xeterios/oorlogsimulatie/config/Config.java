@@ -9,6 +9,7 @@ import mu.xeterios.oorlogsimulatie.Main;
 import mu.xeterios.oorlogsimulatie.map.Map;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
@@ -18,7 +19,7 @@ import java.io.IOException;
 public class Config {
 
     private final Plugin plugin;
-    private final Main main;
+    public final Main main;
 
     private String pluginPrefix;
     private String pluginColor;
@@ -45,10 +46,15 @@ public class Config {
                 for(String string : main.getCustomConfig().getKeys(false)){
                     if (main.getCustomConfig().get(string) != null){
                         Map map = new Map(string, man.getRegion(string));
+                        if (main.getCustomConfig().get(string + ".spawn.attackers") != null){
+                            Location attackerSpawn = main.getCustomConfig().getObject(string + ".spawn.attackers", Location.class);
+                            map.setSpawnAttackers(attackerSpawn);
+                        }
+                        if (main.getCustomConfig().get(string + ".spawn.defenders") != null){
+                            Location defenderSpawn = main.getCustomConfig().getObject(string + ".spawn.defenders", Location.class);
+                            map.setSpawnAttackers(defenderSpawn);
+                        }
                         main.maps.add(map);
-                    }
-                    for (Player p : world.getPlayers()){
-                        p.sendMessage(string + "  " + man.getRegion(string));
                     }
                 }
             }

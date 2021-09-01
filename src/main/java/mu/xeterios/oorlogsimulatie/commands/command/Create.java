@@ -44,19 +44,28 @@ public class Create implements ICmd {
                 sender.sendMessage(config.getPluginPrefix() + ChatColor.RED + "Je hebt geen naam doorgegeven.");
                 return;
             }
-            boolean allowed = true;
+            boolean deniedByName = false;
+            boolean deniedByRegion = false;
             for (Map map : main.maps){
                 if (Objects.equals(args[2], map.getMapName())){
-                    allowed = false;
+                    deniedByName = true;
+                }
+                if (Objects.equals(man.getRegion(map.getRegion().getId()).getId(), args[1])){
+                    deniedByRegion = true;
                 }
             }
-            if (allowed){
+            if (deniedByName && deniedByRegion){
+                sender.sendMessage(config.getPluginPrefix() + ChatColor.RED + "Deze region is al gebonden aan een map en deze naam is al gebruikt.");
+            } else if (deniedByName){
+                sender.sendMessage(config.getPluginPrefix() + ChatColor.RED + "Deze naam is al gebruikt.");
+            } else if (deniedByRegion){
+                sender.sendMessage(config.getPluginPrefix() + ChatColor.RED + "Deze region is al gebonden aan een map.");
+            }
+            if (!deniedByName && !deniedByRegion){
                 Map map = new Map(args[2], region);
                 main.maps.add(map);
                 sender.sendMessage(config.getPluginPrefix() + "New map created: " + map);
                 config.SaveConfig();
-            } else {
-                sender.sendMessage(config.getPluginPrefix() + ChatColor.RED + "Deze region is al gebonden aan een map.");
             }
         } else {
             sender.sendMessage(config.getPluginPrefix() + ChatColor.RED + "Je kan dit alleen doen als een speler.");
