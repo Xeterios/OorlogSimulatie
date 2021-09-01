@@ -11,12 +11,14 @@ import mu.xeterios.oorlogsimulatie.commands.PermissionType;
 import mu.xeterios.oorlogsimulatie.commands.command.Default;
 import mu.xeterios.oorlogsimulatie.config.Config;
 import mu.xeterios.oorlogsimulatie.map.Map;
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.World;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabCompleter;
+import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -107,6 +109,11 @@ public class CommandHandler implements CommandExecutor, TabCompleter {
                 if (args[0].equals("setspawn") && handler.CheckPermission("setspawn") == PermissionType.ALLOWED){
                     for(Map map : config.main.maps){
                         toReturn.add(map.getMapName());
+                    }
+                }
+                if (args[0].equals("setteam") && handler.CheckPermission("setteam") == PermissionType.ALLOWED){
+                    for(Player p : Bukkit.getOnlinePlayers()){
+                        toReturn.add(p.getName());
                     }
                 }
             }
