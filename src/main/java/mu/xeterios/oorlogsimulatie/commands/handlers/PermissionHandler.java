@@ -33,10 +33,10 @@ public class PermissionHandler {
         nodes.put("os", "os.help");
         nodes.put("oorlogsimulatie", "os.help");
         nodes.put("setspawn", "os.setspawn");
+        nodes.put("setteam", "os.setteam");
         nodes.put("create", "os.create");
         nodes.put("forcestop", "os.forcestop");
         nodes.put("forcestart", "os.forcestart");
-        nodes.put("about", "os.about");
         nodes.put("maps", "os.maps");
     }
 

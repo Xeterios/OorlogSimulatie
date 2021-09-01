@@ -36,7 +36,7 @@ public class Maps implements ICmd {
                 sender.sendMessage(tc);
             }
         } else {
-            sender.sendMessage(ChatColor.translateAlternateColorCodes('&', "&8│ "+ config.getPluginColor() + "There are no maps!"));
+            sender.sendMessage(ChatColor.translateAlternateColorCodes('&', "&8│ "+ config.getPluginColor() + "Er zijn geen maps!"));
         }
         sender.sendMessage(ChatColor.translateAlternateColorCodes('&', "&8│"));
         sender.sendMessage(ChatColor.translateAlternateColorCodes('&', "&8└────── " + config.getPluginColor() + "&lOorlog Simulatie&8"));

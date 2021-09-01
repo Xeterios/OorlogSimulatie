@@ -90,10 +90,13 @@ public class CommandHandler implements CommandExecutor, TabCompleter {
                 if (handler.CheckPermission("setspawn") == PermissionType.ALLOWED){
                     toReturn.add("setspawn");
                 }
+                if (handler.CheckPermission("setteam") == PermissionType.ALLOWED){
+                    toReturn.add("setteam");
+                }
             }
             if (args.length == 2){
                 // Possibly implement
-                if (args[0].equals("create")){
+                if (args[0].equals("create") && handler.CheckPermission("create") == PermissionType.ALLOWED){
                     RegionContainer container = WorldGuard.getInstance().getPlatform().getRegionContainer();
                     World world = ((org.bukkit.entity.Player)sender).getWorld();
                     RegionManager man = container.get(BukkitAdapter.adapt(world));
@@ -101,14 +104,14 @@ public class CommandHandler implements CommandExecutor, TabCompleter {
                     Set<String> keys = man.getRegions().keySet();
                     toReturn.addAll(keys);
                 }
-                if (args[0].equals("setspawn")){
+                if (args[0].equals("setspawn") && handler.CheckPermission("setspawn") == PermissionType.ALLOWED){
                     for(Map map : config.main.maps){
                         toReturn.add(map.getMapName());
                     }
                 }
             }
             if (args.length == 3){
-                if (args[0].equals("setspawn")){
+                if ((args[0].equals("setspawn")  && handler.CheckPermission("setspawn") == PermissionType.ALLOWED) || (args[0].equals("setteam") && handler.CheckPermission("setteam") == PermissionType.ALLOWED)){
                     toReturn.add("attackers");
                     toReturn.add("defenders");
                 }

@@ -14,6 +14,8 @@ public class CommandFactory {
                 return new Forcestop(args);
             case "setspawn":
                 return new Setspawn(args);
+            case "setteam":
+                return new Setteam(args);
             case "maps":
                 return new Maps();
             default:

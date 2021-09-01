@@ -50,6 +50,24 @@ public class OS {
         }
     }
 
+    public boolean AddAttacker(Player p){
+        try {
+            this.attackers.add(p);
+            return true;
+        } catch (Exception e){
+            return false;
+        }
+    }
+
+    public boolean AddDefenders(Player p){
+        try {
+            this.defenders.add(p);
+            return true;
+        } catch (Exception e){
+            return false;
+        }
+    }
+
     public World getWorld() {
         return world;
     }
@@ -58,4 +76,11 @@ public class OS {
         return players;
     }
 
+    public ArrayList<Player> getAttackers() {
+        return attackers;
+    }
+
+    public ArrayList<Player> getDefenders() {
+        return defenders;
+    }
 }

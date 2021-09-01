@@ -6,7 +6,7 @@
 
     <groupId>mu.xeterios</groupId>
     <artifactId>OorlogSimulatie</artifactId>
-    <version>0.1-ALPHA</version>
+    <version>0.2-ALPHA</version>
     <packaging>jar</packaging>
 
     <name>OorlogSimulatie</name>
