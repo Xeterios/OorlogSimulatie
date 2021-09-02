@@ -34,6 +34,10 @@ public class Create implements ICmd {
                 sender.sendMessage(config.getPluginPrefix() + ChatColor.RED + "Er zijn geen regions in de wereld waar jij bent.");
                 return;
             }
+            if (!(args.length >= 2)){
+                sender.sendMessage(config.getPluginPrefix() + ChatColor.RED + "Je hebt geen region doorgegeven.");
+                return;
+            }
             ProtectedRegion region = man.getRegion(args[1]);
             if (region == null){
                 sender.sendMessage(config.getPluginPrefix() + ChatColor.RED + "Deze region bestaat niet.");

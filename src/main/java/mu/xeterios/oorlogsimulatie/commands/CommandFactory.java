@@ -6,6 +6,9 @@ public class CommandFactory {
 
     public ICmd GetCommand(String[] args){
         switch (args[0]){
+            case "os":
+            case "oorlogsimulatie":
+                return new Default();
             case "create":
                 return new Create(args);
             case "leave":

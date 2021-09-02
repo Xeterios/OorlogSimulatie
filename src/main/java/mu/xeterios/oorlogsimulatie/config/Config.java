@@ -52,7 +52,7 @@ public class Config {
                         }
                         if (main.getCustomConfig().get(string + ".spawn.defenders") != null){
                             Location defenderSpawn = main.getCustomConfig().getObject(string + ".spawn.defenders", Location.class);
-                            map.setSpawnAttackers(defenderSpawn);
+                            map.setSpawnDefenders(defenderSpawn);
                         }
                         main.maps.add(map);
                     }

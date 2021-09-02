@@ -118,7 +118,18 @@ public class CommandHandler implements CommandExecutor, TabCompleter {
                 }
             }
             if (args.length == 3){
-                if ((args[0].equals("setspawn")  && handler.CheckPermission("setspawn") == PermissionType.ALLOWED) || (args[0].equals("setteam") && handler.CheckPermission("setteam") == PermissionType.ALLOWED)){
+                if (args[0].equals("setspawn")  && handler.CheckPermission("setspawn") == PermissionType.ALLOWED){
+                    toReturn.add("attackers");
+                    toReturn.add("defenders");
+                }
+                if (args[0].equals("setteam") && handler.CheckPermission("setteam") == PermissionType.ALLOWED){
+                    for(Map map : config.main.maps){
+                        toReturn.add(map.getMapName());
+                    }
+                }
+            }
+            if (args.length == 4){
+                if (args[0].equals("setteam") && handler.CheckPermission("setteam") == PermissionType.ALLOWED){
                     toReturn.add("attackers");
                     toReturn.add("defenders");
                 }

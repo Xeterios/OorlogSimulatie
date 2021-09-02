@@ -2,6 +2,7 @@ package mu.xeterios.oorlogsimulatie.game;
 
 import mu.xeterios.oorlogsimulatie.game.timer.TimerHandler;
 import mu.xeterios.oorlogsimulatie.game.timer.TimerType;
+import mu.xeterios.oorlogsimulatie.map.Map;
 import org.bukkit.Bukkit;
 import org.bukkit.World;
 import org.bukkit.entity.Player;
@@ -17,6 +18,7 @@ public class OS {
     private final TimerHandler handler;
     private boolean started;
 
+    private Map map;
     private World world;
 
     public OS() {
@@ -50,26 +52,24 @@ public class OS {
         }
     }
 
-    public boolean AddAttacker(Player p){
-        try {
-            this.attackers.add(p);
-            return true;
-        } catch (Exception e){
-            return false;
-        }
+    public void AddAttacker(Player p){
+        this.attackers.add(p);
     }
 
-    public boolean AddDefenders(Player p){
-        try {
-            this.defenders.add(p);
-            return true;
-        } catch (Exception e){
-            return false;
-        }
+    public void AddDefenders(Player p){
+        this.defenders.add(p);
     }
 
     public World getWorld() {
         return world;
+    }
+
+    public void setMap(Map map){
+        this.map = map;
+    }
+    
+    public Map getMap(){
+        return this.map;
     }
 
     public ArrayList<Player> getPlayers() {
