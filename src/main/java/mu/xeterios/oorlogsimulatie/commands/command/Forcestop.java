@@ -17,6 +17,11 @@ public class Forcestop implements ICmd {
 
     @Override
     public void Execute(CommandSender sender, String label, Main main, Config config) {
-
+        if (main.getGame().isStarted()){
+            main.getGame().Stop();
+            sender.sendMessage(config.getPluginPrefix() + "De game is gestopt.");
+        } else {
+            sender.sendMessage(config.getPluginPrefix() + ChatColor.RED + "De game is niet bezig.");
+        }
     }
 }

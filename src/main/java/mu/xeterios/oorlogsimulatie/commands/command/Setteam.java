@@ -6,6 +6,7 @@ import mu.xeterios.oorlogsimulatie.config.Config;
 import mu.xeterios.oorlogsimulatie.map.Map;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.GameMode;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
@@ -54,6 +55,7 @@ public class Setteam implements ICmd {
                             }
                             if (isDefender){
                                 main.getGame().getDefenders().remove(target);
+                                main.getGame().getPlayers().remove(target);
                                 if (sender == target){
                                     sender.sendMessage(config.getPluginPrefix() + "Jij bent uit de defenders gezet.");
                                 } else {
@@ -66,12 +68,23 @@ public class Setteam implements ICmd {
                                     return;
                                 }
                             }
+                            main.getGame().setMap(selected);
                             main.getGame().AddAttacker(target);
+                            main.getGame().AddPlayer(target);
                             target.teleport(selected.getSpawnAttackers());
+                            target.setBedSpawnLocation(selected.getSpawnAttackers());
+                            target.setGameMode(GameMode.SURVIVAL);
+                            target.setScoreboard(main.getGame().getScoreboard());
+                            if (main.getGame().getSaveOldScoreboard() == null){
+                                main.getGame().setSaveOldScoreboard(target.getScoreboard());
+                            }
                             if (sender == target){
                                 sender.sendMessage(config.getPluginPrefix() + "Jij bent toegevoegd aan de attackers.");
                             } else {
                                 sender.sendMessage(config.getPluginPrefix() + target.getName() + " is toegevoegd aan de attackers.");
+                            }
+                            for(Player p : main.getGame().getPlayers()){
+                                p.sendMessage(config.getPluginPrefix() + ChatColor.YELLOW + target.getName() + ChatColor.translateAlternateColorCodes('&', config.getPluginColor()) + " is nu een " + ChatColor.RED + "attacker.");
                             }
                             break;
                         case "defenders":
@@ -87,6 +100,7 @@ public class Setteam implements ICmd {
                             }
                             if (isAttacker){
                                 main.getGame().getAttackers().remove(target);
+                                main.getGame().getPlayers().remove(target);
                                 if (sender == target){
                                     sender.sendMessage(config.getPluginPrefix() + "Jij bent uit de attackers gezet.");
                                 } else {
@@ -99,17 +113,39 @@ public class Setteam implements ICmd {
                                     return;
                                 }
                             }
-                            main.getGame().AddDefenders(target);
+                            main.getGame().setMap(selected);
+                            main.getGame().AddDefender(target);
+                            main.getGame().AddPlayer(target);
                             target.teleport(selected.getSpawnDefenders());
+                            target.setBedSpawnLocation(selected.getSpawnDefenders());
+                            target.setGameMode(GameMode.SURVIVAL);
+                            target.setScoreboard(main.getGame().getScoreboard());
+                            if (main.getGame().getSaveOldScoreboard() == null){
+                                main.getGame().setSaveOldScoreboard(target.getScoreboard());
+                            }
                             if (sender == target){
                                 sender.sendMessage(config.getPluginPrefix() + "Jij bent toegevoegd aan de defenders.");
                             } else {
                                 sender.sendMessage(config.getPluginPrefix() + target.getName() + " is toegevoegd aan de defenders.");
                             }
+                            for(Player p : main.getGame().getPlayers()){
+                                p.sendMessage(config.getPluginPrefix() + ChatColor.YELLOW + target.getName() + ChatColor.translateAlternateColorCodes('&', config.getPluginColor()) + " is nu een " + ChatColor.BLUE + "defender.");
+                            }
                             break;
                         default:
                             sender.sendMessage(config.getPluginPrefix() + ChatColor.RED + "Attackers of defenders?");
                             break;
+                    }
+                    if (main.getGame().getPlayers().size() > 0){
+                        main.getGame().ActivateListener();
+                        main.getGame().ActivatePreGameListener();
+                        main.getGame().getParticleHandler().setupSpawnParticlesLocations();
+                        main.getGame().getParticleHandler().spawnParticles();
+                        main.getGame().setInitialized(true);
+                        main.getGame().getScoreboardHandler().UpdatePreGameScoreboard(-1);
+                    }
+                    if (main.getGame().getAttackers().size() >= 5 && main.getGame().getDefenders().size() >= 5){
+                        main.getGame().Start();
                     }
                 } else {
                     sender.sendMessage(config.getPluginPrefix() + ChatColor.RED + "Attackers of defenders?");

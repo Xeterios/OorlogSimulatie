@@ -1,5 +1,6 @@
 package mu.xeterios.oorlogsimulatie;
 
+import lombok.Getter;
 import mu.xeterios.oorlogsimulatie.commands.handlers.CommandHandler;
 import mu.xeterios.oorlogsimulatie.config.Config;
 import mu.xeterios.oorlogsimulatie.game.OS;
