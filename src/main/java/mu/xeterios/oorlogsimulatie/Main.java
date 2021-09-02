@@ -32,6 +32,7 @@ public final class Main extends JavaPlugin {
         this.config = new Config(this, this);
         this.game = new OS();
         this.getCommand("oorlogsimulatie").setExecutor(new CommandHandler(this, config));
+        this.getCommand("leave").setExecutor(new CommandHandler(this, config));
     }
 
     public void onDisable() {

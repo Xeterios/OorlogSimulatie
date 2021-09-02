@@ -38,6 +38,7 @@ public class PermissionHandler {
         nodes.put("forcestop", "os.forcestop");
         nodes.put("forcestart", "os.forcestart");
         nodes.put("maps", "os.maps");
+        nodes.put("leave", "os.leave");
     }
 
     public String GetNode(String input){

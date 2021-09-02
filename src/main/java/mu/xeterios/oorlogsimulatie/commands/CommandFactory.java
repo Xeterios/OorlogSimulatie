@@ -8,6 +8,8 @@ public class CommandFactory {
         switch (args[0]){
             case "create":
                 return new Create(args);
+            case "leave":
+                return new Leave();
             case "forcestart":
                 return new Forcestart(args);
             case "forcestop":

@@ -10,3 +10,6 @@ commands:
     description: Control de oorlogsimulatie plugin
     usage: /<command>
     aliases: [os]
+  leave:
+    description: Leave de oorlogsimulatie
+    usage: /<command>
