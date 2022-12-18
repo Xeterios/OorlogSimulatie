@@ -1,6 +1,6 @@
 package mu.xeterios.oorlogsimulatie;
 
-import lombok.Getter;
+import lombok.Setter;
 import mu.xeterios.oorlogsimulatie.commands.handlers.CommandHandler;
 import mu.xeterios.oorlogsimulatie.config.Config;
 import mu.xeterios.oorlogsimulatie.game.OS;
@@ -16,12 +16,13 @@ import java.util.ArrayList;
 
 public final class Main extends JavaPlugin {
 
-    private OS game;
+    @Setter private OS game;
     private Config config;
     public ArrayList<Map> maps;
 
     public File customConfigFile;
     public FileConfiguration customConfig;
+
 
     @Override
     public void onEnable() {
@@ -34,12 +35,12 @@ public final class Main extends JavaPlugin {
         this.game = new OS();
         this.getCommand("oorlogsimulatie").setExecutor(new CommandHandler(this, config));
         this.getCommand("leave").setExecutor(new CommandHandler(this, config));
+        this.getCommand("queue").setExecutor(new CommandHandler(this, config));
     }
 
     public void onDisable() {
         // Plugin shutdown logic
         this.game.Stop();
-        config.SaveConfig();
         config.ReloadConfig();
     }
 

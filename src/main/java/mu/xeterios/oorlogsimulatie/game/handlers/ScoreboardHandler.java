@@ -51,7 +51,6 @@ public class ScoreboardHandler {
     public void UpdateGameScoreboard(int time){
         String timeFormatPlusOne = GetTimeFormat(time+1);
         String timeFormat = GetTimeFormat(time);
-        //Bukkit.getScheduler().scheduleSyncDelayedTask(Main.getPlugin(Main.class), () -> this.game.getScoreboard().resetScores(ChatColor.GRAY + "Tijd over: " + ChatColor.RED + GetTimeFormat(time+1)));
         this.game.getScoreboard().resetScores(ChatColor.RED + "  Attackers " + ChatColor.DARK_GRAY + " » " + ChatColor.GRAY + (this.game.getAttackers().size()+1));
         this.game.getScoreboard().resetScores(ChatColor.BLUE + "  Defenders " + ChatColor.DARK_GRAY + " » " + ChatColor.GRAY + (this.game.getDefenders().size()+1));
 

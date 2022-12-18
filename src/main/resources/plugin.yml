@@ -3,7 +3,7 @@ version: '${project.version}'
 main: mu.xeterios.oorlogsimulatie.Main
 api-version: 1.16
 authors: [ Xeterios ]
-description: The game of murder mystery
+description: Een simulatie die een oorlog nabootst
 depend: [WorldGuard]
 commands:
   oorlogsimulatie:
@@ -12,4 +12,7 @@ commands:
     aliases: [os]
   leave:
     description: Leave de oorlogsimulatie
+    usage: /<command>
+  queue:
+    description: Queue voor een oorlogsimulatie
     usage: /<command>

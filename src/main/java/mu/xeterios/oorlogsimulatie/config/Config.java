@@ -13,8 +13,10 @@ import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
+import scala.concurrent.impl.FutureConvertersImpl;
 
 import java.io.IOException;
+import java.util.Objects;
 
 public class Config {
 
@@ -45,7 +47,7 @@ public class Config {
             if (regions.size() > 0){
                 for(String string : main.getCustomConfig().getKeys(false)){
                     if (main.getCustomConfig().get(string) != null){
-                        Map map = new Map(string, man.getRegion(string));
+                        Map map = new Map(string, man.getRegion(Objects.requireNonNull(main.getCustomConfig().getString(string + ".region"))));
                         if (main.getCustomConfig().get(string + ".spawn.attackers") != null){
                             Location attackerSpawn = main.getCustomConfig().getObject(string + ".spawn.attackers", Location.class);
                             map.setSpawnAttackers(attackerSpawn);

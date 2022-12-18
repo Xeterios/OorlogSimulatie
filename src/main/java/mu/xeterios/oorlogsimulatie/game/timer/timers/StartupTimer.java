@@ -17,7 +17,7 @@ public class StartupTimer extends TimerTask {
 
     private final TimerHandler handler;
     private final OS game;
-    private int i = 60;
+    private int i = 45;
 
     public StartupTimer(TimerHandler handler, OS game){
         this.handler = handler;
@@ -26,7 +26,7 @@ public class StartupTimer extends TimerTask {
 
     @Override
     public void run() {
-        if (i % 61 == 0){
+        if (i % 46 == 0){
             this.cancel();
             game.getParticleHandler().releaseParticles();
             handler.StopTimer();
@@ -39,6 +39,11 @@ public class StartupTimer extends TimerTask {
             }
             game.getScoreboardHandler().ResetScoreboard();
         } else {
+            if (i == 45){
+                for(Player p : game.getPlayers()){
+                    game.giveKit(p);
+                }
+            }
             ChatColor titleColor = null;
             if (i >= 0 && i < 5){
                 titleColor = ChatColor.RED;
@@ -46,13 +51,14 @@ public class StartupTimer extends TimerTask {
             if (i >= 5 && i < 15){
                 titleColor = ChatColor.YELLOW;
             }
-            if (i >= 15 && i <= 60){
+            if (i >= 15 && i <= 45){
                 titleColor = ChatColor.GREEN;
             }
-            if ((i > 0 && i <= 5) || i == 10 || i == 15 || i == 30 || i == 45 || i == 60){
+            if ((i > 0 && i <= 5) || i == 10 || i == 15 || i == 30 || i == 45){
                 for(Player p : game.getPlayers()){
                     p.sendTitle("" + titleColor + i, "", 0, 40, 10);
                     p.playSound(p.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 15, 0);
+                    p.setScoreboard(game.getScoreboard());
                 }
             }
             this.game.getScoreboardHandler().UpdatePreGameScoreboard(i);

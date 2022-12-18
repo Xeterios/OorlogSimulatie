@@ -22,13 +22,13 @@ public class GameTimer extends TimerTask {
         if (i % (i+1) == 0){
             this.cancel();
             handler.StopTimer();
-            handler.RunTimer(TimerType.ENDING);
+            game.Stop();
             game.getScoreboardHandler().ResetScoreboard();
         } else {
             if (game.getDefenders().size() == 0 || game.getAttackers().size() == 0){
                 this.cancel();
                 handler.StopTimer();
-                handler.RunTimer(TimerType.ENDING);
+                game.Stop();
             }
             this.game.getScoreboardHandler().UpdateGameScoreboard(i);
             i--;

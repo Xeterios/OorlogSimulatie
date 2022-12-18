@@ -75,6 +75,9 @@ public class Setteam implements ICmd {
                             target.setBedSpawnLocation(selected.getSpawnAttackers());
                             target.setGameMode(GameMode.SURVIVAL);
                             target.setScoreboard(main.getGame().getScoreboard());
+                            if (main.getGame().isStarted()){
+                                main.getGame().giveKit(target);
+                            }
                             if (main.getGame().getSaveOldScoreboard() == null){
                                 main.getGame().setSaveOldScoreboard(target.getScoreboard());
                             }
@@ -120,6 +123,9 @@ public class Setteam implements ICmd {
                             target.setBedSpawnLocation(selected.getSpawnDefenders());
                             target.setGameMode(GameMode.SURVIVAL);
                             target.setScoreboard(main.getGame().getScoreboard());
+                            if (main.getGame().isStarted()){
+                                main.getGame().giveKit(target);
+                            }
                             if (main.getGame().getSaveOldScoreboard() == null){
                                 main.getGame().setSaveOldScoreboard(target.getScoreboard());
                             }
@@ -136,12 +142,14 @@ public class Setteam implements ICmd {
                             sender.sendMessage(config.getPluginPrefix() + ChatColor.RED + "Attackers of defenders?");
                             break;
                     }
-                    if (main.getGame().getPlayers().size() > 0){
+                    if (main.getGame().getPlayers().size() > 0 && !main.getGame().isInitialized()){
                         main.getGame().ActivateListener();
                         main.getGame().ActivatePreGameListener();
                         main.getGame().getParticleHandler().setupSpawnParticlesLocations();
                         main.getGame().getParticleHandler().spawnParticles();
                         main.getGame().setInitialized(true);
+                    }
+                    if (main.getGame().getPlayers().size() > 0){
                         main.getGame().getScoreboardHandler().UpdatePreGameScoreboard(-1);
                     }
                     if (main.getGame().getAttackers().size() >= 5 && main.getGame().getDefenders().size() >= 5){

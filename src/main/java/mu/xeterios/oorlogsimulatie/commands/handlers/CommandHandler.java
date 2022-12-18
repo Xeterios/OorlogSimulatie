@@ -95,6 +95,9 @@ public class CommandHandler implements CommandExecutor, TabCompleter {
                 if (handler.CheckPermission("setteam") == PermissionType.ALLOWED){
                     toReturn.add("setteam");
                 }
+                if (handler.CheckPermission("fillall") == PermissionType.ALLOWED){
+                    toReturn.add("fillall");
+                }
             }
             if (args.length == 2){
                 // Possibly implement
@@ -114,6 +117,11 @@ public class CommandHandler implements CommandExecutor, TabCompleter {
                 if (args[0].equals("setteam") && handler.CheckPermission("setteam") == PermissionType.ALLOWED){
                     for(Player p : Bukkit.getOnlinePlayers()){
                         toReturn.add(p.getName());
+                    }
+                }
+                if (args[0].equals("fillall") && handler.CheckPermission("fillall") == PermissionType.ALLOWED){
+                    for(Map map : config.main.maps){
+                        toReturn.add(map.getMapName());
                     }
                 }
             }

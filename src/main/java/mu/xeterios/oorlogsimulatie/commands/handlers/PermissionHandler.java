@@ -39,6 +39,9 @@ public class PermissionHandler {
         nodes.put("forcestart", "os.forcestart");
         nodes.put("maps", "os.maps");
         nodes.put("leave", "os.leave");
+        nodes.put("reload", "os.reload");
+        nodes.put("fillall", "os.fillall");
+        nodes.put("queue", "os.queue");
     }
 
     public String GetNode(String input){

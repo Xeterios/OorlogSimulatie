@@ -21,6 +21,7 @@ public class Forcestart implements ICmd {
         if (!main.getGame().isStarted()){
             if (!main.getGame().Start()){
                 sender.sendMessage(config.getPluginPrefix() + ChatColor.RED + "Er moet minstens 1 persoon in elk team zitten.");
+                return;
             }
             sender.sendMessage(config.getPluginPrefix() + "De game start over 60 seconden.");
         } else {

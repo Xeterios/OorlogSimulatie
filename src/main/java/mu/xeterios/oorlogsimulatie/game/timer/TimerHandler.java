@@ -1,7 +1,6 @@
 package mu.xeterios.oorlogsimulatie.game.timer;
 
 import mu.xeterios.oorlogsimulatie.game.OS;
-import mu.xeterios.oorlogsimulatie.game.timer.timers.EndingTimer;
 import mu.xeterios.oorlogsimulatie.game.timer.timers.GameTimer;
 import mu.xeterios.oorlogsimulatie.game.timer.timers.StartupTimer;
 
@@ -23,8 +22,6 @@ public class TimerHandler {
                 return new StartupTimer(this, game);
             case GAME:
                 return new GameTimer(this, game);
-            case ENDING:
-                return new EndingTimer(this, game);
         }
         return null;
     }
@@ -40,8 +37,10 @@ public class TimerHandler {
     }
 
     public void StopTimer() {
-        this.timer.cancel();
-        this.timer.purge();
-        this.timer = new Timer();
+        if (this.timer != null){
+            this.timer.cancel();
+            this.timer.purge();
+            this.timer = new Timer();
+        }
     }
 }

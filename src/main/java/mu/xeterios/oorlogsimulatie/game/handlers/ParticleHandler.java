@@ -104,6 +104,10 @@ public class ParticleHandler {
     }
 
     public void disableParticles(){
-        this.spawnParticles.cancel();
+        if (this.spawnParticles != null){
+            if (!this.spawnParticles.isCancelled()){
+                this.spawnParticles.cancel();
+            }
+        }
     }
 }

@@ -23,6 +23,12 @@ public class CommandFactory {
                 return new Setteam(args);
             case "maps":
                 return new Maps();
+            case "reload":
+                return new Reload();
+            case "fillall":
+                return new Fillall(args);
+            case "queue":
+                return new Queue();
             default:
                 return null;
         }
